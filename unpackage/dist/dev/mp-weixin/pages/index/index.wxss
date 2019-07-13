@@ -1,0 +1,18 @@
+
+.content {
+	text-align: center;
+	height: 400rpx;
+}
+.logo {
+	height: 50rpx;
+	width: 50rpx;
+	margin-top: 0rpx;
+}
+.title {
+	font-size: 56rpx;
+	color: black;
+}
+.bt{
+	width: 50%;
+}
+
