@@ -119,37 +119,60 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 var _default =
 {
   data: function data() {
     return {
       title: '登录页面',
       yanzhen: '',
-      loginInfoVo: { username: '', password: '', useryan: '' } };
+      loginInfoVo: { username: '', password: '' },
+      username: '',
+      userpass: '',
+      useryan: '' };
 
   },
-  onLoad: function demo(e) {
-    uni.request({
-      url: '',
-      methods: 'POST',
-      data: {
-        username: this.loginInfoVo.username,
-        password: this.loginInfoVo.password },
-
-      success: function success(res) {
-        console.log(res);
-      },
-      fall: function fall(failResponse) {} });
-
-
-
+  onLoad: function onLoad() {
+    // uni.request({
+    // 	url:'https://mockapi.eolinker.com/KeQC41x2b370ab73e042befc2c56a925ab511b5116aec98/demo?username=username&userpass=userpass',
+    // 	methods:'POST',
+    // 	data:{
+    // 		 username: this.loginInfoVo.username,
+    //                   password: this.loginInfoVo.password,
+    // 	},
+    // 	success:res=>{
+    // 		console.log(res);
+    // 	},
+    // 	fall:failResponse => {}
+    // })
   },
   methods: {
-    fun: function fun() {
-      if (1) //此处等待后台挂钩子函数demo
+    fun: function fun() {var _this = this;
+      uni.request({
+        url: 'https://mockapi.eolinker.com/KeQC41x2b370ab73e042befc2c56a925ab511b5116aec98/demo',
+        methods: 'GET',
+        data: {
+          username: this.loginInfoVo.username,
+          userpass: this.loginInfoVo.userpass },
+
+        success: function success(res) {
+          console.log(res);
+          _this.yanzhen = res.data.yanzhen;
+        },
+        fall: function fall(failResponse) {
+          uni.showToast({
+            title: '请求错误!' });
+
+        } });
+
+    },
+    lyn: function lyn() {
+      if (this.useryan == this.yanzhen)
+      {
         uni.navigateTo({
           url: '../chenggong/chenggong' });
 
+      }
     } } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 

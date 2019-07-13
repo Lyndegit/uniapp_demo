@@ -4,7 +4,7 @@
 		<view class="flex-item flex-item-V">
             <span>用户名:</span> 
 			<input class="uni-input" focus placeholder="请输入用户名" v-model="loginInfoVo.username"/>
-		</view>
+		</view> 
 		<view class="flex-item flex-item-V">
 			<span>密码:</span> 
 			<input type="uni-input" focus placeholder="请输入密码"  v-model="loginInfoVo.userpass"/>
@@ -14,7 +14,8 @@
 		    <span>
 				{{yanzhen}}
 			</span>
-			<input type="text" v-model="loginInfoVo.useryan"/>
+			<input type="text" v-model="useryan"/>
+			<button type="primary" @tap="lyn">登录</button>
 		</view>
 	</view>
 </template>
@@ -25,31 +26,53 @@
 			return {
 				title: '登录页面',
 				yanzhen:'',
-				 loginInfoVo: { username: '', password: '' ,useryan:''},
+				 loginInfoVo: { username: '', password: ''},
+				 username:'',
+				 userpass:'',
+				 useryan:''
 			}
-		},
-		onLoad:function demo(e) {
-			uni.request({
-				url:'',
-				methods:'POST',
-				data:{
-					 username: this.loginInfoVo.username,
-                     password: this.loginInfoVo.password,
-				},
-				success:res=>{
-					console.log(res);
-				},
-				fall:failResponse => {}
-			})
-		
-           
+		},       
+		onLoad() {
+			// uni.request({
+			// 	url:'https://mockapi.eolinker.com/KeQC41x2b370ab73e042befc2c56a925ab511b5116aec98/demo?username=username&userpass=userpass',
+			// 	methods:'POST',
+			// 	data:{
+			// 		 username: this.loginInfoVo.username,
+   //                   password: this.loginInfoVo.password,
+			// 	},
+			// 	success:res=>{
+			// 		console.log(res);
+			// 	},
+			// 	fall:failResponse => {}
+			// })
 		},
 		methods: {
          fun(){
-			 if(1) //此处等待后台挂钩子函数demo
-			 uni.navigateTo({
-			 	url:'../chenggong/chenggong',
+			 uni.request({
+			 	url:'https://mockapi.eolinker.com/KeQC41x2b370ab73e042befc2c56a925ab511b5116aec98/demo',
+			 	methods:'GET',
+			 	data:{
+					username : this.loginInfoVo.username,
+					userpass : this.loginInfoVo.userpass
+			 	},
+			 	success:res=>{
+			 		console.log(res)
+					this.yanzhen = res.data.yanzhen;
+			 	},
+			 	fall:failResponse => {
+					uni.showToast({
+						title:'请求错误!'
+					})
+				}
 			 })
+			 },
+		 lyn(){
+			 if( this.useryan==this.yanzhen)
+			 {
+				 uni.navigateTo({
+				 	url:'../chenggong/chenggong',
+				 })
+			 }
 		 }
 			 
 		 }
